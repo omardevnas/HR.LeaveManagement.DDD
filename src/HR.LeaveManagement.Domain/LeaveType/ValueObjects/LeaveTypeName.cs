@@ -1,8 +1,9 @@
-using HR.LeaveManagement.Domain.Common;
+using HR.LeaveManagement.Domain.DomainObjectsAbstractions;
+using HR.LeaveManagement.Domain.LeaveType.Constants;
 
-namespace HR.LeaveManagement.Domain.ValueObjects;
+namespace HR.LeaveManagement.Domain.LeaveType.ValueObjects;
 
-public class LeaveTypeName : ValueObject
+public class LeaveTypeName : Value<LeaveTypeName>
 {
     public string Value { get; }
 
@@ -16,7 +17,7 @@ public class LeaveTypeName : ValueObject
         if (string.IsNullOrWhiteSpace(value))
             throw new ArgumentException("Leave type name cannot be empty.", nameof(value));
 
-        if (value.Length > 50)
+        if (value.Length > LeaveTypeConsts.MaxNameLength)
             throw new ArgumentException("Leave type name cannot exceed 50 characters.", nameof(value));
 
         return new LeaveTypeName(value);

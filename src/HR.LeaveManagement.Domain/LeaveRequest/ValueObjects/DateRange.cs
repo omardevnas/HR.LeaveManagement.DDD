@@ -1,8 +1,8 @@
-using HR.LeaveManagement.Domain.Common;
+using HR.LeaveManagement.Domain.DomainObjectsAbstractions;
 
-namespace HR.LeaveManagement.Domain.ValueObjects;
+namespace HR.LeaveManagement.Domain.LeaveRequest.ValueObjects;
 
-public class DateRange : ValueObject
+public class DateRange : Value<DateRange>
 {
     public DateTime Start { get; }
     public DateTime End { get; }

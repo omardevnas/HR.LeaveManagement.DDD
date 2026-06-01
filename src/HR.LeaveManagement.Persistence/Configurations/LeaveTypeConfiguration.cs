@@ -1,4 +1,4 @@
-using HR.LeaveManagement.Domain.Aggregates;
+using HR.LeaveManagement.Domain.LeaveType;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,13 +18,13 @@ public class LeaveTypeConfiguration : IEntityTypeConfiguration<LeaveType>
                 .IsRequired();
         });
 
-        builder.OwnsOne(x => x.DefaultDays, d =>
+        builder.OwnsOne(x => x.LeaveDays, d =>
         {
             d.Property(p => p.Value)
                 .HasColumnName("DefaultDays")
                 .IsRequired();
         });
 
-        builder.Ignore(b => b.DomainEvents);
+        builder.Ignore(x => x.GetChanges());
     }
 }

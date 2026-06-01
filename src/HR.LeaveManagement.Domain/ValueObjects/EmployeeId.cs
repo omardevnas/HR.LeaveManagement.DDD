@@ -1,19 +1,19 @@
-using HR.LeaveManagement.Domain.Common;
+using HR.LeaveManagement.Domain.DomainObjectsAbstractions;
 
 namespace HR.LeaveManagement.Domain.ValueObjects;
 
-public class EmployeeId : ValueObject
+public class EmployeeId : Value<EmployeeId>
 {
-    public string Value { get; }
+    public Guid Value { get; }
 
-    private EmployeeId(string value)
+    public EmployeeId(Guid value)
     {
-        Value = value;
+        Value = Create(value);
     }
 
-    public static EmployeeId Create(string value)
+    private  EmployeeId Create(Guid value)
     {
-        if (string.IsNullOrWhiteSpace(value))
+        if (value == null || value == Guid.Empty)
             throw new ArgumentException("Employee ID cannot be empty.", nameof(value));
 
         return new EmployeeId(value);
@@ -24,5 +24,5 @@ public class EmployeeId : ValueObject
         yield return Value;
     }
 
-    public static implicit operator string(EmployeeId id) => id.Value;
+    public static implicit operator Guid(EmployeeId id) => id.Value;
 }

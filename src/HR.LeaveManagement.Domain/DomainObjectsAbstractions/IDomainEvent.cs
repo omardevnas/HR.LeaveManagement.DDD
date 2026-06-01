@@ -1,4 +1,4 @@
-namespace HR.LeaveManagement.Domain.Common;
+namespace HR.LeaveManagement.Domain.DomainObjectsAbstractions;
 
 public interface IDomainEvent
 {

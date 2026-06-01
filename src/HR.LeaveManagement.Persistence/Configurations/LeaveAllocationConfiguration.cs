@@ -1,4 +1,4 @@
-using HR.LeaveManagement.Domain.Aggregates;
+using HR.LeaveManagement.Domain.LeaveAllocation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -28,6 +28,6 @@ public class LeaveAllocationConfiguration : IEntityTypeConfiguration<LeaveAlloca
 
         builder.Property(x => x.NumberOfDays).IsRequired();
 
-        builder.Ignore(b => b.DomainEvents);
+        builder.Ignore(x => x.GetChanges());
     }
 }

@@ -1,4 +1,4 @@
-using HR.LeaveManagement.Domain.Aggregates;
+using HR.LeaveManagement.Domain.LeaveRequest;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -25,15 +25,10 @@ public class LeaveRequestConfiguration : IEntityTypeConfiguration<LeaveRequest>
             dr.Property(p => p.End).HasColumnName("EndDate").IsRequired();
         });
 
-        builder.OwnsOne(x => x.Status, s =>
-        {
-            s.Property(p => p.Value)
-                .HasColumnName("Status")
-                .IsRequired();
-        });
+        builder.Property(x => x.Status).HasConversion<string>();
 
         builder.Property(x => x.Comments).HasMaxLength(500);
 
-        builder.Ignore(b => b.DomainEvents);
+        builder.Ignore(x => x.GetChanges());
     }
 }

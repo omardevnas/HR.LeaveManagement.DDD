@@ -1,19 +1,20 @@
-using HR.LeaveManagement.Domain.Common;
+using HR.LeaveManagement.Domain.DomainObjectsAbstractions;
 
-namespace HR.LeaveManagement.Domain.ValueObjects;
+namespace HR.LeaveManagement.Domain.LeaveAllocation.ValueObjects;
 
-public class AllocationPeriod : ValueObject
+public class AllocationPeriod : Value<AllocationPeriod>
 {
     public int Year { get; }
 
-    private AllocationPeriod(int year)
+    public AllocationPeriod(int year)
     {
         Year = year;
     }
 
-    public static AllocationPeriod Create(int year)
+    private AllocationPeriod Create(int year)
     {
-        if (year < 2000 || year > 2100)
+        var currentYear = DateTime.UtcNow.Year;
+        if (year < currentYear || year > currentYear)
             throw new ArgumentException("Invalid allocation period.");
 
         return new AllocationPeriod(year);

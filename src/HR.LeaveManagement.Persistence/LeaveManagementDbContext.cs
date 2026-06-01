@@ -1,4 +1,6 @@
-using HR.LeaveManagement.Domain.Aggregates;
+using HR.LeaveManagement.Domain.LeaveAllocation;
+using HR.LeaveManagement.Domain.LeaveRequest;
+using HR.LeaveManagement.Domain.LeaveType;
 using Microsoft.EntityFrameworkCore;
 
 namespace HR.LeaveManagement.Persistence;
